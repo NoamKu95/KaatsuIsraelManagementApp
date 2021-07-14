@@ -193,7 +193,6 @@ export default function ManageStock(props) {
   //Send the edited products to the DB:
   const sendNewAmountsOfProducts = () => {
 
-    let a = 0;
     const apiUrl = `https://proj.ruppin.ac.il/bgroup12/prod/api/editstock`;
     fetch(apiUrl,
       {
