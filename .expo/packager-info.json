@@ -1,0 +1,8 @@
+{
+  "devToolsPort": 19002,
+  "expoServerPort": 19000,
+  "packagerPort": 19000,
+  "expoServerNgrokUrl": "https://67-iee.noamku.kaatsu.exp.direct",
+  "packagerNgrokUrl": "https://packager.67-iee.noamku.kaatsu.exp.direct",
+  "ngrokPid": 492
+}
