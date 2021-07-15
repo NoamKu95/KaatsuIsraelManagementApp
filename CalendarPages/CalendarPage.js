@@ -574,7 +574,7 @@ export default function CalendarPage(props) {
                                 <Timeline
 
                                     onEventPress={(event) =>
-                                        event.id == 0 ?
+                                        event.title == 'לא נקבעו התרחשויות להיום' ?
                                             ''
                                             :
                                             props.navigation.navigate('OccurenceDetails', {
