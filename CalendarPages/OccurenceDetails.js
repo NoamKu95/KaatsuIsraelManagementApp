@@ -447,6 +447,7 @@ export default function OccurenceDetails(props) {
             }
         }
 
+
         if (!isLegit) {
 
             setAlertTitle("שגיאה");
@@ -455,21 +456,61 @@ export default function OccurenceDetails(props) {
         }
         else {
 
-            if (oSubject == '') {
-                setAlertTitle("שגיאה");
-                setAlertMessage("נא להזין נושא");
-                setShowAlert(true);
+            // -- Check if the date inserted is from today forward (no past dates can be inserted to the DB) -- //
+            let isFuture = true;
+            let todayDay = new Date().getDate(); let todayMonth = new Date().getMonth() + 1; let todayYear = new Date().getFullYear();
+
+            if (year > todayYear) {
+
+                isFuture = true
+            }
+            else if (month > todayMonth && year >= todayYear) {
+
+                isFuture = true;
+            }
+            else if (month < todayMonth && year == todayYear) {
+
+                isFuture = false;
+            }
+            else if (year == todayYear && month == todayMonth) {
+
+                if (day >= todayDay) {
+
+                    isFuture = true;
+                }
+                else {
+
+                    isFuture = false;
+                }
             }
             else {
 
-                if (oContent == '' && occurenceType == 'אירוע') {
+                isFuture = false;
+            }
+
+            if (!isFuture) {
+
+                setAlertTitle("שגיאה");
+                setAlertMessage("לא ניתן להזין תאריך הקטן מהתאריך של היום");
+                setShowAlert(true);
+            }
+            else {
+                if (oSubject == '') {
                     setAlertTitle("שגיאה");
-                    setAlertMessage("נא להזין תוכן");
+                    setAlertMessage("נא להזין נושא");
                     setShowAlert(true);
                 }
                 else {
 
-                    mandatoryFieldsOK = true;
+                    if (oContent == '' && occurenceType == 'אירוע') {
+                        setAlertTitle("שגיאה");
+                        setAlertMessage("נא להזין תוכן");
+                        setShowAlert(true);
+                    }
+                    else {
+
+                        mandatoryFieldsOK = true;
+                    }
                 }
             }
         }
@@ -479,7 +520,6 @@ export default function OccurenceDetails(props) {
         let optionalCheckOK = true;
         // Check the following fields if the occurrence is an אירוע:
         if (occurenceType == "אירוע") {
-
 
             if (parseInt(oStartHour_Hour) >= 24 || parseInt(oStartHour_Hour) < 0 || parseInt(oStartHour_Minutes) > 59 || parseInt(oStartHour_Minutes) < 0) {
 
